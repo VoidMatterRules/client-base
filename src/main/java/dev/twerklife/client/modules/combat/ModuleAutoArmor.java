@@ -39,7 +39,7 @@ public class ModuleAutoArmor extends Module {
         ItemStack chestplate = mc.player.getInventory().getStack(38);
         ItemStack pants = mc.player.getInventory().getStack(37);
         ItemStack boots = mc.player.getInventory().getStack(36);
-        boolean bl = allGood = (float) DamageUtils.getRoundedDamage(helmet) >= this.armorHP.getValue().floatValue() && (float)DamageUtils.getRoundedDamage(chestplate) >= this.armorHP.getValue().floatValue() && (float)DamageUtils.getRoundedDamage(pants) >= this.armorHP.getValue().floatValue() && (float)DamageUtils.getRoundedDamage(boots) >= this.armorHP.getValue().floatValue();
+        allGood = (float) DamageUtils.getRoundedDamage(helmet) >= this.armorHP.getValue().floatValue() && (float)DamageUtils.getRoundedDamage(chestplate) >= this.armorHP.getValue().floatValue() && (float)DamageUtils.getRoundedDamage(pants) >= this.armorHP.getValue().floatValue() && (float)DamageUtils.getRoundedDamage(boots) >= this.armorHP.getValue().floatValue();
         if (this.autoMend.getValue() && this.isSafe() && (mc.player.getMainHandStack().getItem().equals(Items.EXPERIENCE_BOTTLE) && mc.options.useKey.isPressed() || ModuleMiddleClick.INSTANCE.xping) && !allGood) {
             this.saveArmor(helmet, 5);
             this.saveArmor(chestplate, 6);

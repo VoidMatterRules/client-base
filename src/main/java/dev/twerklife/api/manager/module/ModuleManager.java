@@ -10,6 +10,7 @@ import dev.twerklife.client.modules.combat.*;
 import dev.twerklife.client.modules.miscellaneous.ModuleWelcomer;
 import dev.twerklife.client.modules.movement.ModuleSprint;
 import dev.twerklife.client.modules.movement.ModuleVelocity;
+import dev.twerklife.client.modules.movement.ModuleStep;
 import dev.twerklife.client.modules.player.ModuleMultiTask;
 import dev.twerklife.client.modules.visuals.ModuleCrosshair;
 //import dev.twerklife.client.modules.visuals.ModuleNameTags;
@@ -52,6 +53,7 @@ public class ModuleManager implements IMinecraft, EventListener {
         //Movement
         this.register(new ModuleSprint());
         this.register(new ModuleVelocity());
+        this.register(new ModuleStep());
 
         //Player
         this.register(new ModuleMultiTask());

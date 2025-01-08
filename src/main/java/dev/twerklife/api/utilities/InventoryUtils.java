@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 
@@ -13,10 +14,9 @@ public class InventoryUtils implements IMinecraft {
     public static int getTargetSlot(String input) {
         int obsidianSlot = InventoryUtils.findBlock(Blocks.OBSIDIAN, 0, 9);
         int chestSlot = InventoryUtils.findBlock(Blocks.ENDER_CHEST, 0, 9);
-        if (obsidianSlot == -1 && chestSlot == -1) {
-            return -1;
-        }
-        if (obsidianSlot != -1 && chestSlot == -1) {
+        int webSlot = InventoryUtils.findBlock(Blocks.COBWEB, 0, 9);
+        int pearlSlot = InventoryUtils.findItem(Items.ENDER_PEARL, 0, 9);
+        if (obsidianSlot != -1 && chestSlot == -1 && webSlot == -1) {
             return obsidianSlot;
         }
         if (obsidianSlot == -1) {
@@ -25,7 +25,16 @@ public class InventoryUtils implements IMinecraft {
         if (input.equals("Obsidian")) {
             return obsidianSlot;
         }
-        return chestSlot;
+        if (input.equals("Chest")) {
+            return chestSlot;
+        }
+        if (input.equals("Web")) {
+            return webSlot;
+        }
+        if (input.equals("Pearl")) {
+            return pearlSlot;
+        }
+        return -1;
     }
 
     public static void switchSlot(int slot, boolean silent) {
@@ -82,11 +91,6 @@ public class InventoryUtils implements IMinecraft {
             return i;
         }
         return -1;
-    }
-
-    public enum ItemModes {
-        Obsidian,
-        Chest
     }
 
     public enum SwitchModes {

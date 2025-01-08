@@ -22,7 +22,7 @@ import java.util.List;
 public class ModuleHoleFill extends Module {
     ValueEnum mode = new ValueEnum("Mode", "Mode", "Mode for the holefill.", Modes.Smart);
     ValueEnum autoSwitch = new ValueEnum("Switch", "Switch", "The mode for Switching.", InventoryUtils.SwitchModes.Normal);
-    ValueEnum itemSwitch = new ValueEnum("Item", "Item", "The item to place the blocks with.", InventoryUtils.ItemModes.Obsidian);
+    ValueEnum itemSwitch = new ValueEnum("Item", "Item", "The item to place the blocks with.", ModuleHoleFill.ItemModes.Obsidian);
     ValueNumber range = new ValueNumber("Range", "Range", "Range to place blocks.", Float.valueOf(8.0f), Float.valueOf(3.0f), Float.valueOf(8.0f));
     ValueNumber targetRange = new ValueNumber("TargetRange", "TargetRange", "The range for the target.", Float.valueOf(6.0f), Float.valueOf(0.0f), Float.valueOf(10.0f));
     ValueBoolean noTargetDisable = new ValueBoolean("NoTargetDisable", "No Target Check", "Disable the module if there is no target.", false);
@@ -108,6 +108,11 @@ public class ModuleHoleFill extends Module {
         return holes;
     }
 
+    public enum ItemModes {
+        Obsidian,
+        Chest,
+        Web
+    }
     public enum Modes {
         Normal,
         Smart

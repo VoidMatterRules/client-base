@@ -25,7 +25,7 @@ import java.util.List;
 public class ModuleSurround extends Module {
     private final ValueEnum mode = new ValueEnum("Mode", "Mode", "The mode for the Surround.", Modes.Normal);
     private final ValueEnum autoSwitch = new ValueEnum("Switch", "Switch", "The mode for Switching.", InventoryUtils.SwitchModes.Normal);
-    private final ValueEnum itemSwitch = new ValueEnum("Item", "Item", "The item to place the blocks with.", InventoryUtils.ItemModes.Obsidian);
+    private final ValueEnum itemSwitch = new ValueEnum("Item", "Item", "The item to place the blocks with.", ModuleSurround.ItemModes.Obsidian);
     private final ValueNumber blocks = new ValueNumber("Blocks", "Blocks", "The amount of blocks that can be placed per tick.", 8, 1, 40);
     private final ValueEnum supports = new ValueEnum("Supports", "Supports", "The support blocks for the Surround.", Supports.Dynamic);
     private final ValueBoolean dynamic = new ValueBoolean("Dynamic", "Dynamic", "Makes the surround place dynamically.", true);
@@ -181,6 +181,10 @@ public class ModuleSurround extends Module {
         Static
     }
 
+    public enum ItemModes {
+        Obsidian,
+        Chest
+    }
     public enum Modes {
         Normal,
         Persistent,

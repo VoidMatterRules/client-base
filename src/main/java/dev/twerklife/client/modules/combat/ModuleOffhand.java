@@ -4,14 +4,13 @@ import dev.twerklife.api.manager.module.Module;
 import dev.twerklife.api.manager.module.RegisterModule;
 import dev.twerklife.api.utilities.HoleUtils;
 import dev.twerklife.api.utilities.InventoryUtils;
-import dev.twerklife.client.events.EventMotion;
 import dev.twerklife.client.values.impl.ValueBoolean;
 import dev.twerklife.client.values.impl.ValueEnum;
 import dev.twerklife.client.values.impl.ValueNumber;
 import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
 
-@RegisterModule(name="Offhand", description="Automatically switch items to your offhand.", category=Module.Category.COMBAT)
+@RegisterModule(name = "Offhand", description = "Automatically switch items to your offhand.", category = Module.Category.COMBAT)
 public class ModuleOffhand extends Module {
     ValueEnum mode = new ValueEnum("Mode", "Mode", "Mode for offhand.", Modes.Totem);
     ValueNumber hp = new ValueNumber("Health", "Health", "Health of player", 12.0f, 1.0f, 20.0f);
@@ -19,13 +18,25 @@ public class ModuleOffhand extends Module {
     ValueBoolean swordGap = new ValueBoolean("SwordGap", "Sword Gap", "Automatically switch to gap when sword.", false);
     ValueBoolean halfInHole = new ValueBoolean("HalfInHole", "Half In Hole", "require half of hp cfg in hole", true); //TODO: just set this to be a customizeable holehp setting
 
+    public void onEnable() {
+        if (mc.player != null) {
+            if (this.mode.getValue().equals(Modes.Totem) && mc.player.getOffHandStack().getItem() != Items.TOTEM_OF_UNDYING) {
+                InventoryUtils.offhandItem(Items.TOTEM_OF_UNDYING);
+            } else if (this.mode.getValue().equals(Modes.Crystal) && mc.player.getOffHandStack().getItem() != Items.END_CRYSTAL) {
+                InventoryUtils.offhandItem(Items.END_CRYSTAL);
+            } else if (this.mode.getValue().equals(Modes.Gapple) && mc.player.getOffHandStack().getItem() != Items.ENCHANTED_GOLDEN_APPLE) {
+                InventoryUtils.offhandItem(Items.ENCHANTED_GOLDEN_APPLE);
+            }
+        }
+    }
+
     @Override
-    public void onMotion(EventMotion event) {
-        super.onMotion(event);
+    public void onUpdate() {
+        super.onUpdate();
         if (super.nullCheck()) {
             return;
         }
-        if (mc.player.getHealth() + ModuleOffhand.mc.player.getAbsorptionAmount() <= this.hp.getValue().floatValue() || mc.player.fallDistance >= (float)this.fall.getValue().intValue() && !mc.player.isFallFlying() && !HoleUtils.isInHole(mc.player)) {
+        if (mc.player.getHealth() + ModuleOffhand.mc.player.getAbsorptionAmount() <= this.hp.getValue().floatValue() || mc.player.fallDistance >= (float) this.fall.getValue().intValue() && !mc.player.isFallFlying() && !HoleUtils.isInHole(mc.player)) {
             if (mc.player.getOffHandStack().getItem() != Items.TOTEM_OF_UNDYING) {
                 InventoryUtils.offhandItem(Items.TOTEM_OF_UNDYING);
             }
@@ -41,8 +52,8 @@ public class ModuleOffhand extends Module {
             InventoryUtils.offhandItem(Items.TOTEM_OF_UNDYING);
         } else if (this.mode.getValue().equals(Modes.Crystal) && mc.player.getOffHandStack().getItem() != Items.END_CRYSTAL) {
             InventoryUtils.offhandItem(Items.END_CRYSTAL);
-        } else if (this.mode.getValue().equals(Modes.Gapple) && mc.player.getOffHandStack().getItem() != Items.GOLDEN_APPLE) {
-            InventoryUtils.offhandItem(Items.GOLDEN_APPLE);
+        } else if (this.mode.getValue().equals(Modes.Gapple) && mc.player.getOffHandStack().getItem() != Items.ENCHANTED_GOLDEN_APPLE) {
+            InventoryUtils.offhandItem(Items.ENCHANTED_GOLDEN_APPLE);
         }
     }
 

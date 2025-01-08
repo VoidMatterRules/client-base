@@ -1,3 +1,29 @@
-This is a personal Test bed for all sorts of Client development, it's mainly for myself to learn Java and client Development as a whole and improve on what i already know in some sort of real life scenario, anyone wanting to download this can freely do it, although its highly unlikely even anything will work. I also do not guarantee that i will upload a fully built version of the client, meaning anyone wanting to use this, will likely first need to build it with a tool like graddle.
 
-Main Credit goes to the People that ported the old oyvey source code and base from 1.12.2 to 1.21.1, if you want the original source code which i am baseing this test bed of, then click on the following link:
+# Client Base
+Client base for fabric 1.21.1
+## UI
+![gui](./assets/image1.png)
+
+![hudeditor](./assets/image2.png)
+## Installation
+1. Clone the repository
+2. Run `./gradlew genSources`
+3. Run `./gradlew build`
+4. Client jar is in `build/libs/client-base-???.jar` (not `..-sources.jar`)
+
+## Gui Binding
+You must use `.bind gui [key]`
+
+## Comes with
+* Good color picker 
+* Hud editor
+* Mutiple starter modules
+
+## Credit
+* Event System - https://github.com/MeteorDevelopment/orbit
+### People
+* Rom
+* heedi
+* ZANE
+
+## Fork anytime
